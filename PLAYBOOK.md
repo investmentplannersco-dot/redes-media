@@ -62,6 +62,20 @@ Cada lunes se prepara contenido desde el primer día sin contenido programado de
 - Uso: copiar el script, reemplazar el diccionario de piezas con el contenido nuevo y ejecutar `OUT=<carpeta> python3 <script> [claves]`. Chromium está en /opt/pw-browsers. Revisar visualmente cada pieza antes de mostrarla.
 - Logo de Contraining solo sobre fondos claros.
 
+## Historias con voz en off (ElevenLabs) — solo @contrainingfarma
+
+Dentro de las historias diarias de Contraining que se preparan cada lunes, entre 2 y 3 por semana llevan voz en off. No son contenido adicional: reemplazan a historias estáticas de esa misma semana, así nunca compiten con lo demás. No se usan en IP360 ni en LinkedIn.
+
+- **Voz:** Lina (colombiana), `voice_id` `yfUfwZTRubVrsUZWqzwp`, `model_id` `eleven_v4`, `generations_count` 1, con `creative_generate_speech`. Una llamada por guion; nunca repetir una llamada para reintentar (cada una cobra créditos).
+- **Guion:** 35 a 50 palabras (13 a 16 segundos), con pregunta o gancho inicial y cierre invitando a escribir por WhatsApp. El número se escribe "tres cero uno, siete dos siete, sesenta y cinco diecisiete" y aparece en máximo una historia con voz por semana. Solo datos confirmados de este playbook.
+- **Diseño:** plantilla `st()` del kit, igual que `kit/gen_historias_voz_s2.py` (copiar ese script, cambiar solo el contenido). El texto de la imagen resume lo que dice la voz.
+- **Anotar** de cada audio, con `creative_get_flow_run_status`: `duration_secs`, créditos y `flow_id`. En la aprobación, mostrar el costo total con la suma desglosada.
+- **Audios:** el espacio de trabajo no puede descargarlos de ElevenLabs. Al pedir la aprobación, pedirle a Joaquín que adjunte en la conversación los audios descargados desde el reproductor.
+- **Emparejar** cada archivo adjunto con su historia comparando su duración (`ffprobe`) con `duration_secs`: el archivo mide unos 0,02 a 0,06 s más. Si dos duraciones quedan a menos de 0,15 s, confirmar con Joaquín.
+- **Video:** `ffmpeg -loop 1 -framerate 30 -i Hn.png -i audio.mp3 -af "apad=pad_dur=1" -c:v libx264 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 160k -ar 44100 -shortest -movflags +faststart Hn.mp4`. Subir PNG y MP4 a la carpeta de la semana.
+- **Programar** como historia con el MP4: `instagramData` = `{"type":"STORY","isAiGenerated":true}` (la voz es sintética). Si Joaquín no adjunta los audios, esas historias se programan como imagen sola, sin voz.
+- **Destacados:** Metricool no los agrega por esta vía; recordarle a Joaquín que los agrega a mano en Instagram (Destacar o desde Archivo).
+
 ## Publicar imágenes y programar
 
 1. Exportar a JPG (calidad 92) en `AAAA-MM-<marca>-semanaN/` dentro de este repositorio; commit y push a `main`.
