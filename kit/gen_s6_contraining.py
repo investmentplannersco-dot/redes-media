@@ -3,30 +3,63 @@ Copia del kit: usa las plantillas ct(), st() y pr() de gen_contraining_personal;
 import os, sys
 from playwright.sync_api import sync_playwright
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from gen_contraining_personal import ct, st, pr, FOOT, ISO, LOGO_H, A, FOTO
+from gen_contraining_personal import ct, st, pr, FOOT, ISO, LOGO_H, A
 
 END = '<div style="height:120px"></div>'
 CHIP = '<div style="margin-top:70px"><span class="chip">WhatsApp 301 727 6517</span></div>'
 pieces = {}
 
-# ---------- LinkedIn (retrato en todas) ----------
-def li(title, sub, accent, who, logo="", tsize=110):
-    lg = f'<img src="{logo}" style="height:80px;position:absolute;left:88px;bottom:200px">' if logo else ""
-    return pr(f"""
-<img src="{FOTO}" style="position:absolute;right:-60px;bottom:0;height:860px">
-<div class="pad"><div class="name">Joaquín Piña Labastida</div>
-<h1 style="font-size:{tsize}px;margin-top:80px;max-width:900px">{title}</h1>
-<div style="width:90px;height:6px;background:{accent};margin-top:56px"></div>
-<p style="margin-top:36px;max-width:470px">{sub}</p>
-{lg}
-<div class="foot"><div class="who">{who}</div></div></div>""")
+# ---------- LinkedIn (infografías con datos, sin retrato) ----------
+def info(title, sub, cuerpo, fuente, who, accent, logo="", tsize=84):
+    lg = f'<img src="{logo}" style="height:72px">' if logo else ""
+    return pr(f"""<div class="pad"><div class="name">Joaquín Piña Labastida</div>
+<h1 style="font-size:{tsize}px;margin-top:56px">{title}</h1>
+<p style="margin-top:22px;font-size:34px;color:var(--piedra)">{sub}</p>
+<div style="width:90px;height:6px;background:{accent};margin-top:30px"></div>
+{cuerpo}
+<div class="foot" style="padding-top:20px"><div class="who">{who}<span style="font-size:21px;max-width:760px">{fuente}</span></div>{lg}</div></div>""")
 
-pieces["L12"] = li("Una sola opción no es una decisión.", "Es una instrucción.",
-                   "var(--oro)", "Joaquín Piña<span>IP360</span>", f"{A}/logo_ip.png", 104)
-pieces["L13"] = li("«No lo sé.»", "Tres palabras que un líder comercial debería practicar.",
-                   "var(--carbon)", "Joaquín Piña<span>Coach ontológico ICF</span>", tsize=132)
-pieces["L14"] = li("La primera visita no debería ser la primera práctica.", "La visita médica no se improvisa. Se entrena.",
-                   "var(--sea)", "Joaquín Piña<span>Contraining</span>", f"{A}/iso_ct.png", 92)
+def barra(pct, etiqueta, color):
+    txt = f"{pct:.1f}".replace(".", ",") + " %"
+    return f"""<div style="margin-top:30px"><div style="display:flex;justify-content:space-between;align-items:baseline">
+<span style="font-size:30px;font-weight:600">{etiqueta}</span><span style="font-family:FR;font-size:48px;font-weight:600">{txt}</span></div>
+<div style="height:30px;background:#E4DED4;margin-top:8px"><div style="height:30px;width:{pct}%;background:{color}"></div></div></div>"""
+
+pieces["L12"] = info("Tener un producto no es haber decidido.", "Adultos en Colombia, 2025",
+    barra(96.5, "Con al menos un producto de depósito", "var(--oro)")
+    + barra(85.5, "Con un depósito activo", "var(--oro)")
+    + barra(51.6, "Con crédito o financiación formal", "var(--carbon)")
+    + barra(23.9, "Con tarjeta de crédito", "var(--carbon)")
+    + '''<p style="margin-top:40px;font-family:FR;font-size:46px;font-weight:600;line-height:1.15">Ninguna de estas cifras dice cuántos compararon antes de firmar.</p>''',
+    "Fuente: Superfinanciera y Banca de las Oportunidades, Reporte de Inclusión Financiera 2025.",
+    "Joaquín Piña · IP360", "var(--oro)", f"{A}/logo_ip.png")
+
+def fila(signo, color, caso, efecto):
+    return f"""<div style="display:flex;align-items:center;gap:34px;border-top:2px solid #DDD7CE;padding:30px 0">
+<div style="width:92px;height:92px;flex:none;background:{color};color:#fff;font-family:FR;font-size:64px;display:flex;align-items:center;justify-content:center">{signo}</div>
+<div><div style="font-size:34px;font-weight:700;line-height:1.2">{caso}</div><div style="font-size:30px;color:var(--piedra);margin-top:6px">{efecto}</div></div></div>"""
+
+pieces["L13"] = info("¿Pedir ayuda le resta autoridad?", "Depende de para qué y a quién.",
+    '<div style="margin-top:40px">'
+    + fila("+", "var(--sea)", "Tarea difícil, a alguien que sabe del tema", "Lo ven más competente.")
+    + fila("=", "var(--piedra)", "Tarea fácil", "No cambia la percepción.")
+    + fila("–", "var(--carbon)", "A alguien que no sabe del tema", "Puede perjudicarlo.")
+    + '''</div><p style="margin-top:30px;font-family:FR;font-size:46px;font-weight:600;line-height:1.15">«No lo sé» es el comienzo, no el final.</p>''',
+    "Fuente: Brooks, Gino y Schweitzer, Management Science, 2015. Estudios experimentales.",
+    "Joaquín Piña · Coach ontológico ICF", "var(--carbon)", tsize=92)
+
+def columna(pct, anio, color):
+    return f"""<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:400px">
+<div style="font-family:FR;font-size:84px;font-weight:600">{pct} %</div>
+<div style="width:230px;height:{pct*4.4:.0f}px;flex:none;background:{color};margin-top:12px"></div>
+<div style="font-size:32px;font-weight:600;margin-top:14px">{anio}</div></div>"""
+
+pieces["L14"] = info("Cada vez hay menos puertas abiertas.", "Médicos accesibles para la industria, EE. UU.",
+    '<div style="display:flex;gap:40px;margin-top:30px">' + columna(60, "2023", "var(--piedra)") + columna(45, "2024", "var(--sea)") + '</div>'
+    + '''<p style="margin-top:26px;font-size:32px;font-weight:600;line-height:1.3">Y la mitad de los accesibles se reúne con tres compañías o menos.</p>
+<p style="margin-top:18px;font-family:FR;font-size:46px;font-weight:600;line-height:1.15">La primera visita no debería ser la primera práctica.</p>''',
+    "Fuente: Veeva Pulse Report, Top Insights 4Q24. No son datos de Colombia.",
+    "Joaquín Piña · Contraining", "var(--sea)", f"{A}/iso_ct.png")
 
 # ---------- @contrainingfarma publicaciones ----------
 # P8 · Laboratorios: coordinación de formación (carrusel de 3) · jueves 5, 18:00
