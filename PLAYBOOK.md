@@ -61,6 +61,7 @@ Cada lunes se prepara contenido desde el primer día sin contenido programado de
 - Tamaños: publicaciones 1080×1350; historias 1080×1920 con zona segura de 260 px arriba y 280 px abajo.
 - Uso: copiar el script, reemplazar el diccionario de piezas con el contenido nuevo y ejecutar `OUT=<carpeta> python3 <script> [claves]`. Chromium está en /opt/pw-browsers. Revisar visualmente cada pieza antes de mostrarla.
 - Logo de Contraining solo sobre fondos claros.
+- **LinkedIn:** las piezas no llevan la foto de Joaquín. Cada una es una infografía, gráfico o dato pensado para que la gente la comparta, con la fuente en la imagen. Las cifras deben ser verificables y lo más recientes posible; si son de otro país, la imagen lo dice. Plantilla: `info()` de `kit/gen_s6_contraining.py`.
 
 ## Historias con voz en off (ElevenLabs) — solo @contrainingfarma
 
