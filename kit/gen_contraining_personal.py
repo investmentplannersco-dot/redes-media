@@ -40,7 +40,7 @@ li b{font-family:LS;font-weight:700}
 
 def ct(body, w=1080, h=1350, page=""):
     pg = f'<div class="page">{page}</div>' if page else ""
-    return f"<html><head><style>:root{{--w:{w}px;--h:{h}px}}{FONTS}{CT}</style></head><body>{pg}{body}</body></html>"
+    return f"<html><head><meta charset=\"utf-8\"><style>:root{{--w:{w}px;--h:{h}px}}{FONTS}{CT}</style></head><body>{pg}{body}</body></html>"
 
 FOOT = f'<div class="foot"><span>WhatsApp 301 727 6517 · contraining.co</span></div>'
 LOGO_H = f'<img src="{A}/logo_ct_h.png" style="height:64px;align-self:flex-start">'

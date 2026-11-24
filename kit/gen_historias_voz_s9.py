@@ -10,23 +10,31 @@ CHIP = '<div style="margin-top:70px"><span class="chip">WhatsApp 301 727 6517</s
 
 pieces = {}
 
+from visual_ct import icono, sello, marca_agua, franja, calendario, precios
+def kick(nombre, texto):
+    return f'<div style="display:flex;gap:20px;align-items:center">{sello(nombre, 84)}<div class="kicker">{texto}</div></div>'
+def deco():
+    return marca_agua(900, -320, -260, .08) + franja(20) + franja(20, abajo=True)
+
 # Vie 27 · laboratorios: outsourcing de fuerzas de ventas (voz)
-pieces["H51"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Para laboratorios</div>
-<h1 style="font-size:104px;margin-top:30px">¿Tu laboratorio necesita una fuerza de ventas?</h1>
-<div class="bar" style="margin-top:60px"></div>
-<h2 style="font-size:60px;margin-top:50px">Outsourcing de fuerzas de ventas: reclutamiento, entrenamiento a la medida y seguimiento.</h2>
+def paso(nombre, rotulo):
+    return f"""<div style="flex:1;background:#FFF8EA;border-radius:26px;padding:28px 16px;display:flex;flex-direction:column;align-items:center;gap:16px">
+{sello(nombre, 110)}<span style="font-family:LS;font-weight:700;font-size:32px;text-align:center;line-height:1.1">{rotulo}</span></div>"""
+pieces["H51"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("maletin", "Para laboratorios")}
+<h1 style="font-size:104px;margin-top:40px">¿Tu laboratorio necesita una fuerza de ventas?</h1>
+<h2 style="font-size:54px;margin-top:40px">Outsourcing de fuerzas de ventas:</h2>
+<div style="display:flex;gap:18px;margin-top:30px">{paso("lupa", "Reclutamiento")}{paso("diana", "Entrenamiento a la medida")}{paso("grafica", "Seguimiento")}</div>
 <p style="margin-top:40px;font-size:42px">Más de 30 fuerzas de ventas administradas.</p>
 {CHIP}</div>{END}""")
 
 # Lun 30 · diplomado: último día del precio actual (voz, con el número)
-pieces["H54"] = st(f"""<div style="margin-top:auto"><div class="kicker">Diplomado en Visita Médica</div>
-<h1 style="font-size:130px;margin-top:30px">Hoy es el último día</h1>
-<h2 style="font-size:60px;margin-top:20px">con el precio actual.</h2>
-<div class="bar" style="margin-top:50px"></div>
-<div style="margin-top:50px;font-size:40px">Hasta hoy, 30 de noviembre</div>
-<div class="n" style="font-size:140px;line-height:1">$2.753.000</div>
-<div style="margin-top:30px;font-size:40px">Desde mañana: <b>$3.110.000</b></div>
+pieces["H54"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("reloj", "Diplomado en Visita Médica")}
+<h1 style="font-size:118px;margin-top:40px">Hoy es el<br>último día</h1>
+<h2 style="font-size:56px;margin-top:16px">con el precio actual.</h2>
+{calendario([26, 27, 28, 29, 30, 1], 30, 30, {26: "NOV", 1: "DIC"})}
+{precios(rot_antes="Hasta hoy, 30 de noviembre", rot_despues="Desde mañana")}
 {CHIP}</div>{END}""")
 
 if __name__ == "__main__":

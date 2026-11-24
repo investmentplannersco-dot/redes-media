@@ -75,89 +75,110 @@ pieces["L23"] = info("¿Le sobra plata<br>al final del mes?", "Bienestar financi
     "Joaquín Piña · IP360", "#D4AF37", tsize=80)
 
 # ---------- @contrainingfarma publicaciones (ajuste: las dos del ciclo son de laboratorios) ----------
+# Versión con elementos visuales (íconos, sellos, marca de agua, calendario): kit/visual_ct.py
+from visual_ct import icono, sello, tarjeta, marca_agua, circulo, franja, calendario, precios
+
 # P14 · Laboratorios: outsourcing de fuerzas de ventas · jueves 26, 18:00
-pieces["P14_1"] = ct(f"""<div class="pad">{LOGO_H}
-<div style="margin-top:150px" class="kicker">Para laboratorios</div>
-<h1 style="font-size:116px;margin-top:30px">¿Necesitas una fuerza de ventas en campo?</h1>
+pieces["P14_1"] = ct(f"""{marca_agua(820, -260, -240)}{franja(24)}<div class="pad">{LOGO_H}
+<div style="margin-top:120px;display:flex;gap:22px;align-items:center">{sello("maletin", 96)}<div class="kicker">Para laboratorios</div></div>
+<h1 style="font-size:116px;margin-top:40px">¿Necesitas una fuerza de ventas en campo?</h1>
 <div class="bar" style="margin-top:56px"></div>
 <h2 style="font-size:62px;margin-top:40px">Outsourcing de fuerzas de ventas.</h2>
 {FOOT}</div>""", page="1/3")
-pieces["P14_2"] = ct(f"""<div class="pad">{ISO}
-<h1 style="font-size:92px;margin-top:70px">Lo que hacemos por tu laboratorio</h1>
-<ul class="big" style="margin-top:40px">
-<li><b>Reclutamiento</b> de visitadores médicos.</li>
-<li><b>Entrenamiento a la medida</b> de tu fuerza de ventas.</li>
-<li><b>Seguimiento</b> de la fuerza de ventas.</li>
-</ul>{FOOT}</div>""", page="2/3")
-pieces["P14_3"] = ct(f"""<div class="pad">{ISO}
-<div class="n" style="font-size:240px;line-height:.9;margin-top:90px">+30</div>
-<h2 style="font-size:64px;margin-top:20px">fuerzas de ventas administradas</h2>
+pieces["P14_2"] = ct(f"""{franja(24)}<div class="pad">{ISO}
+<h1 style="font-size:88px;margin-top:50px">Lo que hacemos por tu laboratorio</h1>
+<div style="margin-top:30px">
+{tarjeta("lupa", "Reclutamiento", "de visitadores médicos.")}
+{tarjeta("diana", "Entrenamiento a la medida", "de tu fuerza de ventas.")}
+{tarjeta("grafica", "Seguimiento", "de la fuerza de ventas.")}
+</div>{FOOT}</div>""", page="2/3")
+pieces["P14_3"] = ct(f"""{circulo(560, 150, 330, "var(--peach)")}{marca_agua(700, -240, -220)}<div class="pad">{ISO}
+<div style="margin-top:110px;display:flex;align-items:center;gap:30px">{sello("equipo", 170, "var(--sea)", "#fff")}
+<div class="n" style="font-size:240px;line-height:.9">+30</div></div>
+<h2 style="font-size:64px;margin-top:34px">fuerzas de ventas administradas</h2>
 <div class="bar" style="margin-top:56px"></div>
 <p style="margin-top:40px;font-size:40px">Cuéntanos qué necesita tu equipo.</p>
-<div style="margin-top:auto"><span class="chip">WhatsApp 301 727 6517 · contraining.co</span></div>
+<div style="margin-top:auto;display:flex;gap:18px;align-items:center">{icono("chat", 64)}<span class="chip">WhatsApp 301 727 6517 · contraining.co</span></div>
 </div>""", page="3/3")
 
 # P15 · Laboratorios: enlace con profesionales comerciales de alto nivel · martes 1 de diciembre, 18:00
-pieces["P15_1"] = ct(f"""<div class="pad">{LOGO_H}
-<div style="margin-top:150px" class="kicker">Para laboratorios</div>
-<h1 style="font-size:112px;margin-top:30px">¿Buscas un perfil comercial de alto nivel?</h1>
+pieces["P15_1"] = ct(f"""{marca_agua(820, -260, -240)}{franja(24)}<div class="pad">{LOGO_H}
+<div style="margin-top:120px;display:flex;gap:22px;align-items:center">{sello("lupa", 96)}<div class="kicker">Para laboratorios</div></div>
+<h1 style="font-size:112px;margin-top:40px">¿Buscas un perfil comercial de alto nivel?</h1>
 <div class="bar" style="margin-top:56px"></div>
 <h2 style="font-size:58px;margin-top:40px">El cargo no espera. El perfil correcto tampoco.</h2>
 {FOOT}</div>""", page="1/3")
-pieces["P15_2"] = ct(f"""<div class="pad">{ISO}
-<h1 style="font-size:92px;margin-top:70px">Hacemos el enlace</h1>
-<p style="font-size:50px;line-height:1.3;margin-top:40px">entre <b>profesionales comerciales de alto nivel</b> y <b>compañías farmacéuticas</b>.</p>
-<div class="bar" style="margin-top:56px"></div>
-<p style="font-size:42px;line-height:1.35;margin-top:40px">Y si lo que necesitas es un equipo: <b>reclutamiento de visitadores médicos</b>.</p>
+def nodo(nombre, rotulo):
+    return f"""<div style="display:flex;flex-direction:column;align-items:center;width:300px;text-align:center">{sello(nombre, 190, "#FFF8EA")}
+<div style="font-family:LS;font-weight:700;font-size:38px;color:var(--ink);line-height:1.1;margin-top:20px">{rotulo}</div></div>"""
+pieces["P15_2"] = ct(f"""{franja(24)}<div class="pad">{ISO}
+<h1 style="font-size:92px;margin-top:50px">Hacemos el enlace</h1>
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-top:60px">
+{nodo("maletin", "Profesionales comerciales de alto nivel")}
+<div style="margin-top:56px">{sello("enlace", 120, "var(--sea)", "#fff")}</div>
+{nodo("equipo", "Compañías farmacéuticas")}</div>
+<div style="margin-top:56px;background:var(--peach);border-radius:26px;padding:28px 34px;display:flex;gap:26px;align-items:center">{icono("lupa", 64)}
+<p style="font-size:38px;line-height:1.3">Y si lo que necesitas es un equipo: <b style="font-family:LS">reclutamiento de visitadores médicos</b>.</p></div>
 {FOOT}</div>""", page="2/3")
-pieces["P15_3"] = ct(f"""<div class="pad">{ISO}
-<div class="n" style="font-size:200px;line-height:.9;margin-top:90px">+27 años</div>
-<h2 style="font-size:58px;margin-top:20px">formando visitadores médicos en Colombia</h2>
-<p style="margin-top:30px;font-size:42px">Más de 3.000 egresados · 158 promociones</p>
-<div class="bar" style="margin-top:50px"></div>
+def dato(valor, rotulo):
+    return f"""<div style="flex:1;background:#FFF8EA;border-radius:28px;padding:34px 30px;border-top:12px solid var(--apr)">
+<div class="n" style="font-size:96px;line-height:.95">{valor}</div><div style="font-family:LS;font-weight:600;font-size:34px;margin-top:12px;line-height:1.1">{rotulo}</div></div>"""
+pieces["P15_3"] = ct(f"""{marca_agua(700, -240, -220)}<div class="pad">{ISO}
+<h2 style="font-size:60px;margin-top:70px">Formando visitadores médicos en Colombia</h2>
+<div style="display:flex;gap:22px;margin-top:44px">{dato("+27", "años")}{dato("+3.000", "egresados")}{dato("158", "promociones")}</div>
+<div class="bar" style="margin-top:56px"></div>
 <p style="margin-top:40px;font-size:40px">Cuéntanos qué perfil buscas.</p>
-<div style="margin-top:auto"><span class="chip">WhatsApp 301 727 6517 · contraining.co</span></div>
+<div style="margin-top:auto;display:flex;gap:18px;align-items:center">{icono("chat", 64)}<span class="chip">WhatsApp 301 727 6517 · contraining.co</span></div>
 </div>""", page="3/3")
 
 # ---------- @contrainingfarma historias (H51 y H54 llevan voz: ver gen_historias_voz_s9.py) ----------
-PRECIOS = """<div class="bar" style="margin-top:50px"></div>
-<div style="margin-top:50px;font-size:40px">Hasta el 30 de noviembre</div>
-<div class="n" style="font-size:140px;line-height:1">$2.753.000</div>
-<div style="margin-top:30px;font-size:40px">Desde el 1 de diciembre: <b>$3.110.000</b></div>"""
-pieces["H50"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Diplomado en Visita Médica</div>
-<div style="font-family:LS;font-weight:600;font-size:60px;margin-top:30px">Quedan</div>
-<div class="n" style="font-size:300px;line-height:.9">4 días</div>
-<h2 style="font-size:60px;margin-top:20px">con el precio actual.</h2>
-{PRECIOS}
+NOVDIC = {26: "NOV", 1: "DIC"}
+DIAS = [26, 27, 28, 29, 30, 1]
+def kick(nombre, texto):
+    return f'<div style="display:flex;gap:20px;align-items:center">{sello(nombre, 84)}<div class="kicker">{texto}</div></div>'
+def deco():
+    return marca_agua(900, -320, -260, .08) + franja(20) + franja(20, abajo=True)
+
+pieces["H50"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("calendario", "Diplomado en Visita Médica")}
+<h1 style="font-size:130px;margin-top:40px">Quedan 4 días</h1>
+<h2 style="font-size:56px;margin-top:16px">con el precio actual.</h2>
+{calendario(DIAS, 30, 26, NOVDIC)}
+{precios()}
 {CHIP}</div>{END}""")
-pieces["H52"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Diplomado en Visita Médica</div>
-<h1 style="font-size:116px;margin-top:30px">¿Quién enseña?</h1>
-<div class="bar" style="margin-top:60px"></div>
-<h2 style="font-size:66px;margin-top:50px">Docentes con experiencia en la industria farmacéutica.</h2>
-<p style="margin-top:40px;font-size:42px">Clases virtuales en vivo. Inicio: 18 de febrero de 2027.</p>
+pieces["H52"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("docente", "Diplomado en Visita Médica")}
+<h1 style="font-size:116px;margin-top:40px">¿Quién enseña?</h1>
+<div class="bar" style="margin-top:50px"></div>
+<h2 style="font-size:64px;margin-top:40px">Docentes con experiencia en la industria farmacéutica.</h2>
+<div style="display:flex;gap:20px;margin-top:50px">
+<div style="flex:1;background:#FFF8EA;border-radius:26px;padding:28px;display:flex;gap:20px;align-items:center">{icono("pantalla", 70)}<span style="font-size:34px;line-height:1.2">Clases virtuales en vivo</span></div>
+<div style="flex:1;background:#FFF8EA;border-radius:26px;padding:28px;display:flex;gap:20px;align-items:center">{icono("calendario", 70)}<span style="font-size:34px;line-height:1.2">Inicio: 18 de febrero de 2027</span></div></div>
 {CHIP}</div>{END}""")
-pieces["H53"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Diplomado en Visita Médica</div>
-<h1 style="font-size:120px;margin-top:30px">Mañana es el último día</h1>
-<h2 style="font-size:60px;margin-top:20px">con el precio actual.</h2>
-{PRECIOS}
+pieces["H53"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("reloj", "Diplomado en Visita Médica")}
+<h1 style="font-size:124px;margin-top:40px">Mañana es el último día</h1>
+<h2 style="font-size:56px;margin-top:16px">con el precio actual.</h2>
+{calendario(DIAS, 30, 29, NOVDIC)}
+{precios()}
 {CHIP}</div>{END}""")
-pieces["H55"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Para laboratorios</div>
-<h1 style="font-size:104px;margin-top:30px">¿Buscas un perfil comercial de alto nivel?</h1>
-<div class="bar" style="margin-top:60px"></div>
-<h2 style="font-size:60px;margin-top:50px">Enlazamos profesionales comerciales de alto nivel con compañías farmacéuticas.</h2>
+pieces["H55"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("maletin", "Para laboratorios")}
+<h1 style="font-size:104px;margin-top:40px">¿Buscas un perfil comercial de alto nivel?</h1>
+<div style="display:flex;align-items:center;gap:26px;margin-top:60px">{sello("maletin", 150, "#FFF8EA")}<div style="flex:1;height:8px;background:var(--apr);border-radius:4px"></div>
+{sello("enlace", 120, "var(--sea)", "#fff")}<div style="flex:1;height:8px;background:var(--apr);border-radius:4px"></div>{sello("equipo", 150, "#FFF8EA")}</div>
+<h2 style="font-size:56px;margin-top:50px">Enlazamos profesionales comerciales de alto nivel con compañías farmacéuticas.</h2>
 {CHIP}</div>{END}""")
-pieces["H56"] = st(f"""<div style="margin-top:auto">
-<div class="kicker">Diplomado en Visita Médica</div>
-<h1 style="font-size:104px;margin-top:30px">Inicio: 18 de febrero de 2027</h1>
-<div class="bar" style="margin-top:60px"></div>
-<div style="margin-top:50px;font-size:40px">Desde el 1 de diciembre de 2026</div>
-<div class="n" style="font-size:140px;line-height:1">$3.110.000</div>
-<div style="margin-top:36px;background:var(--peach);padding:28px 36px;border-radius:24px;font-size:36px;line-height:1.35">
-<b style="font-family:LS">12 % de descuento</b> para referidos de egresados y por pronto pago.</div>
+pieces["H56"] = st(f"""{deco()}<div style="margin-top:auto">
+{kick("calendario", "Diplomado en Visita Médica")}
+<h1 style="font-size:104px;margin-top:40px">Inicio: 18 de febrero de 2027</h1>
+<div style="display:flex;gap:20px;margin-top:44px">
+<div style="flex:1;background:#FFF8EA;border-radius:26px;padding:26px;display:flex;gap:18px;align-items:center">{icono("reloj", 64)}<span style="font-size:32px;line-height:1.2">120 horas en 3 meses</span></div>
+<div style="flex:1;background:#FFF8EA;border-radius:26px;padding:26px;display:flex;gap:18px;align-items:center">{icono("pantalla", 64)}<span style="font-size:32px;line-height:1.2">Virtual en vivo, 7:00 a 9:00 p. m.</span></div></div>
+<div style="margin-top:44px;font-size:38px">Desde el 1 de diciembre de 2026</div>
+<div class="n" style="font-size:130px;line-height:1">$3.110.000</div>
+<div style="margin-top:30px;background:var(--peach);padding:26px 32px;border-radius:24px;display:flex;gap:22px;align-items:center">{icono("etiqueta", 60)}
+<span style="font-size:34px;line-height:1.3"><b style="font-family:LS">12 % de descuento</b> para referidos de egresados y por pronto pago.</span></div>
 {CHIP}</div>{END}""")
 
 if __name__ == "__main__":
